@@ -6,11 +6,11 @@
 </head>
 <body>
 <h1>Translator</h1>
-<form action="translation/exec" method="post">
+<form action="translation" method="post">
     <br>
-    <textarea name="source" rows="6" cols="20">翻訳したい文</textarea>
+    <textarea name="source" rows="6" cols="20" placeholder="翻訳したい文">[[${source}]]</textarea>
     ===>
-    <textarea name="source" rows="6" cols="20">訳文</textarea>
+    <textarea name="target" rows="6" cols="20" placeholder="訳文">[[${target}]]</textarea>
     <input type="submit" value="Translate!">
 </form>
 <h2>History</h2>
