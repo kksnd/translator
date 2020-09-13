@@ -1,0 +1,18 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Translator</title>
+</head>
+<body>
+<h1>Translator</h1>
+<form action="translation/exec" method="post">
+    <br>
+    <textarea name="source" rows="6" cols="20">翻訳したい文</textarea>
+    ===>
+    <textarea name="source" rows="6" cols="20">訳文</textarea>
+    <input type="submit" value="Translate!">
+</form>
+<h2>History</h2>
+</body>
+</html>
