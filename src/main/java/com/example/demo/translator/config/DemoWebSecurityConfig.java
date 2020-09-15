@@ -15,7 +15,8 @@ class DemoWebSecurityConfig extends WebSecurityConfigurerAdapter {
         // AUTHORIZE
         http.authorizeRequests()
                 .mvcMatchers("/hello").permitAll()
-                .mvcMatchers("/translation").permitAll()
+                .mvcMatchers("/home").permitAll()
+                //.mvcMatchers("/translation").permitAll()
                 .mvcMatchers("/hc").permitAll()
                 .anyRequest().authenticated()
         ;

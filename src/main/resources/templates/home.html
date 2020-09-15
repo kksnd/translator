@@ -12,8 +12,10 @@
     <div th:insert="header :: navbar"></div>
     <div class="m-5">
         <div class="m-3">
-            <h2>Hello, Here is the message from Flask based translation API</h2>
-            <div class="shadow p-3 mb-5 bg-white rounded">[[${message}]]</div>
+            <h2>You can translate your sentences to English or to Japanese!</h2>
+        </div>
+        <div class="mx-auto">
+            <a class="btn btn-primary" th:href="@{'translation'}" role="button">Get Started!</a>
         </div>
     </div>
 
