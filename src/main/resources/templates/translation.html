@@ -9,17 +9,24 @@
 </head>
 
 <body>
-<div th:insert="header :: navbar"></div>
+    <div th:insert="header :: navbar"></div>
 
-<form th:action="@{/translation}" method="post">
-    <br>
-    <textarea name="source" rows="6" cols="20" placeholder="翻訳したい文">[[${source}]]</textarea>
-    ===>
-    <textarea name="target" rows="6" cols="20" placeholder="訳文">[[${target}]]</textarea>
-    <input type="submit" value="Translate!">
-</form>
+    <div class="m-5">
+        <form th:action="@{/translation}" method="post">
+            <br>
+            <textarea name="source" class="form-control" placeholder="Sentences you want to translate">[[${source}]]</textarea>
+            <br>
+            <div class="mx-auto">
+                <button type="submit" class="btn btn-outline-primary">Translate!</button>
+            </div>
+            <br>
+            <textarea name="target" class="form-control" placeholder="訳文" readonly>[[${target}]]</textarea>
+        </form>
 
-<h2>History</h2>
+        <br><br>
+
+        <h2>History</h2>
+    </div>
 
 <!-- BootStrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

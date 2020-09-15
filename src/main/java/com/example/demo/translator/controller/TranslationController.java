@@ -44,7 +44,7 @@ public class TranslationController {
         RestTemplate restTemplate = new RestTemplate();
 
         // XML POST
-        String URL = "http://localhost:5000/translate/to_ja";
+        String URL = "http://localhost:5000/translate/to_en";
         TranslateRequestModel request = new TranslateRequestModel();
         request.setText(source);
         TranslatedResponseModel translatedResponseModel = restTemplate.postForObject(URL, request, TranslatedResponseModel.class);
