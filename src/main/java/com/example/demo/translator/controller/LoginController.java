@@ -13,7 +13,7 @@ public class LoginController {
         return "hello";
     }
 
-    @GetMapping(path = "success", produces = "text/html")
+    @GetMapping(path = {"success", "ok"}, produces = "text/html")
     @ResponseBody
     public String success() {
         return "成功!!!";
