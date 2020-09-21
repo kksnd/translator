@@ -1,19 +1,24 @@
 package com.example.demo.translator.controller;
 
-import com.example.demo.translator.model.HelloResponseModel;
-import com.example.demo.translator.model.TranslateRequestModel;
-import com.example.demo.translator.model.TranslatedJsonResponseModel;
-import com.example.demo.translator.model.TranslatedResponseModel;
+import com.example.demo.translator.model.*;
+import com.example.demo.translator.repository.PairTextsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TranslationController {
+
+    @Autowired
+    private PairTextsRepository pairTextsRepository;
+
     @GetMapping(path = "hc", produces = "text/html")
     public String healthCheck(Model model) {
         RestTemplate restTemplate = new RestTemplate();
@@ -35,6 +40,17 @@ public class TranslationController {
     public String translationGet(Model model) {
         model.addAttribute("source", "");
         model.addAttribute("target", "");
+
+        List<PairTextsModel> histories = new ArrayList<>();
+        int i = 0;
+        for (PairTextsModel pairTexts : pairTextsRepository.findAll()) {
+            histories.add(pairTexts);
+            if (++i >= 10) {
+                break;
+            }
+        }
+        model.addAttribute("histories", histories);
+
         return "translation";
     }
 
@@ -52,8 +68,35 @@ public class TranslationController {
 
         System.out.println(translatedText);
 
+        // insert result
+        PairTextsModel newPairTexts = new PairTextsModel();
+        newPairTexts.setSource(source);
+        newPairTexts.setTarget(translatedText);
+        if (source.length() > 5) {
+            newPairTexts.setSourceHead(source.substring(0, 5) + "...");
+        } else {
+            newPairTexts.setSourceHead(source);
+        }
+        if (translatedText.length() > 5) {
+            newPairTexts.setTargetHead(translatedText.substring(0, 5) + "...");
+        } else {
+            newPairTexts.setTargetHead(translatedText);
+        }
+        pairTextsRepository.save(newPairTexts);
+
+        // for view
         model.addAttribute("source", source);
         model.addAttribute("target", translatedText);
+
+        List<PairTextsModel> histories = new ArrayList<>();
+        int i = 0;
+        for (PairTextsModel pairTexts : pairTextsRepository.findAll()) {
+            histories.add(pairTexts);
+            if (++i >= 10) {
+                break;
+            }
+        }
+        model.addAttribute("histories", histories);
 
         return "translation";
     }

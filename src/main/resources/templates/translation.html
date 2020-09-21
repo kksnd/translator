@@ -26,6 +26,12 @@
         <br><br>
 
         <h2>History</h2>
+        <table class="table">
+            <tr th:each="history : ${histories}">
+                <td th:text="${history.sourceHead}"></td>
+                <td th:text="${history.targetHead}"></td>
+            </tr>
+        </table>
     </div>
 
 <!-- BootStrap -->
